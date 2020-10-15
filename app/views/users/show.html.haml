@@ -1,0 +1,38 @@
+.wrapper
+  = render "tweets/side"
+  .Main
+    %p.userName= "#{@name}さんの投稿一覧"
+    .Contents
+      .Contents__post
+        - @tweets.each do |tweet|
+          .Posts-mypage
+            .Posts__name
+              = link_to tweet_path(tweet.id), class: 'Posts__name' do
+                = tweet.title
+            %p.Picture
+              = link_to tweet_path(tweet.id) do
+                = image_tag tweet.image.url, class: 'Picture' if tweet.image.present?
+            .Information
+              .Information_star-raty{id:"star-rate-#{tweet.id}"}
+
+              :javascript
+                $('#star-rate-#{tweet.id}').raty({
+                  size: 36,
+                  starOff: "#{asset_path('star-off.png')}",
+                  starOn: "#{asset_path('star-on.png')}",
+                  starHalf: "#{asset_path('star-half.png')}",
+                  half: true,
+                  readOnly: true,
+                  score: "#{tweet.rate}"
+                });
+
+              .Information__likes-comments
+                = "#{tweet.likes.length}件のいいね #{tweet.comments.length}件のコメント"
+            - if user_signed_in? && current_user.id == tweet.user_id
+              .DestroyEdit
+                = link_to edit_tweet_path(tweet.id), method: :get do
+                  .DestroyEdit__Edit-btn
+                    編集
+                = link_to tweet_path(tweet.id), method: :delete do
+                  .DestroyEdit__Destroy-btn
+                    削除

@@ -1,0 +1,32 @@
+.wrapper
+  = render "tweets/side"
+  .Main
+    .Contents
+      .Contents__post-main
+        = "#{@name}"
+        .Post-genre-all
+          - @tweets.each do |tweet|
+            .Picture-top
+              = image_tag tweet.image.url, class: 'Picture-home' if tweet.image.present?
+              = link_to tweet_path(tweet.id), class: 'Information-top' do
+                .Posts__name-top
+                  = tweet.title
+                .Information-top-star
+                  おすすめ度
+                .Information_star-raty{id:"star-rate-#{tweet.id}"}
+
+                :javascript
+                  $('#star-rate-#{tweet.id}').raty({
+                    size: 36,
+                    starOff: "#{asset_path('star-off.png')}",
+                    starOn: "#{asset_path('star-on.png')}",
+                    starHalf: "#{asset_path('star-half.png')}",
+                    half: true,
+                    readOnly: true,
+                    score: "#{tweet.rate}"
+                  });
+
+                .Information__likes-comments-top
+                  = icon('fas', 'heart fa-lg heart_red')
+                  = "#{tweet.likes.length}件"
+                  = "コメント#{tweet.comments.length}件"

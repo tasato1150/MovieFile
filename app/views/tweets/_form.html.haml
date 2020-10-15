@@ -1,0 +1,35 @@
+.NewPage__form
+  = form_with model: @tweet, html: {class: "Form"}, local: true do |f|
+    .Form__contents
+      .Form__contents-title
+        = f.label :title, 'タイトル'
+        = f.text_field :title
+      .Form__cntents-genre
+        = f.label :genre, 'ジャンル(複数選択可)'
+      .Form__checkbox
+        = collection_check_boxes :tweet, :genre_ids, Genre.all, :id, :name do |g|
+          = g.label {g.check_box + g.text}
+      .Form__contens-image
+        = f.label :image, '画像アップロード'
+        %p= f.file_field :image, class: 'Image'
+      .Form__contents-evaluation#star
+        = f.label :rate, 'おすすめ度'
+        %p= f.hidden_field :rate, id: :raty_star
+
+      :javascript
+        $('#star').raty({
+        size: 36,
+        starOff: "#{asset_path('star-off.png')}",
+        starOn: "#{asset_path('star-on.png')}",
+        starHalf: "#{asset_path('star-half.png')}",
+        scoreName: 'tweet[rate]',
+        half: true,
+        });
+
+      .Form__contents-text
+        = f.label :text, '感想'
+        = f.text_area :text, class: 'impressions'
+      .Form__contents-day
+        = f.label :date, '観賞日'
+        %p= f.date_field :date
+    = f.submit 'SEND', class: 'button'

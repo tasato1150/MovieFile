@@ -1,0 +1,39 @@
+.Side
+  .Side__header
+    = link_to root_path do
+      %h1.Title
+        = icon("fas", "film")
+        MovieDiary
+  .List
+    %ul.List__menu
+      %li.List__home
+        = link_to root_path do
+          = icon('fas', 'home fa-lg')
+          ホーム
+      %li.List__mypage
+        = link_to "/users/#{current_user.id}" do
+          = icon('fas', 'user-alt fa-lg')
+          マイページ
+      %li
+        = link_to new_tweet_path do
+          .List__btn
+            投稿する
+      %ul.List__genre
+        %p ジャンル一覧
+        %li= link_to "アクション", "/genres/1", class: "action"
+        %li= link_to "SF", "/genres/2"
+        %li= link_to "アドベンチャー", "/genres/3"
+        %li= link_to "ヒューマンドラマ", "/genres/4"
+        %li= link_to "コメディ", "/genres/5"
+        %li= link_to "サスペンス", "/genres/6"
+        %li= link_to "ホラー", "/genres/7"
+        %li= link_to "ラブストーリー", "/genres/8"
+        %li= link_to "ファミリー", "/genres/9"
+        %li= link_to "スポーツ", "/genres/10"
+        %li= link_to "ミュージカル", "/genres/11"
+        %li= link_to "ドキュメンタリー", "/genres/12"
+        %li= link_to "戦争", "/genres/13"
+      %li.List__logout
+        = link_to destroy_user_session_path, method: :delete do
+          = icon('fas', 'sign-out-alt fa-lg')
+          ログアウト

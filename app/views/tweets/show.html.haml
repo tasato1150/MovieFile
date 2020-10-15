@@ -1,0 +1,53 @@
+.wrapper
+  = render "side"
+  .Main
+    %p.userName 詳細ページ
+    .Contents
+      .Contents__post
+        .Posts-show
+          .Posts__name
+            = @tweet.title
+          %p.Picture
+            = image_tag @tweet.image.url, class: 'Picture' if @tweet.image.present?
+          .Information
+            .Information_star-raty{id:"star-rate-#{@tweet.id}"}
+
+            :javascript
+              $('#star-rate-#{@tweet.id}').raty({
+                size: 36,
+                starOff: "#{asset_path('star-off.png')}",
+                starOn: "#{asset_path('star-on.png')}",
+                starHalf: "#{asset_path('star-half.png')}",
+                half: true,
+                readOnly: true,
+                score: "#{@tweet.rate}"
+              });
+
+            %div{id: "likes_buttons_#{@tweet.id}"}
+              = render partial: 'likes/like', locals: { tweet: @tweet } 
+          .Information__contents
+            .Information__Genre
+              ジャンル：
+            .Information__create-at
+              観賞日：
+            .Information__user
+              投稿者：
+              = link_to "/users/#{@tweet.user_id}" do
+                = @tweet.user.name
+            .Information__contents-name
+              感想：
+            .Information__contents-text
+              = safe_join(@tweet.text.split("\n"),tag(:br))
+        .Comments
+          = form_with model: [@tweet, @comment], html: {class: "Comments__Form", id: "new_comment"}, local: true do |f|
+            = f.text_area :text, placeholder: 'コメントする', class: "textbox"
+            = f.submit 'SEND', class: 'button'
+          .Comments__list
+            %h4 <コメント一覧>
+            - if @comments
+              - @comments.each do |comment|
+                .Comments__list-comment
+                  = link_to "/users/#{comment.user_id}" do
+                    = comment.user.name
+                  ：
+                  = comment.text

@@ -1,0 +1,62 @@
+.Main
+  = form_with url: search_tweets_path, method: :get, class: "Search-box", local: true do |f|
+    = f.text_field :keyword, class: 'Search-box__input', placeholder: 'タイトルで映画を検索'
+    = button_tag type: 'submit', class: "Search-box__btn" do
+      = icon('fa', 'search fa-lg')
+  .Contents
+    .Contents__post-main
+      全ての作品
+      .Post-genre-all
+        - @tweets.each do |tweet|
+          .Picture-top
+            = image_tag tweet.image.url, class: 'Picture-home' if tweet.image.present?
+            = link_to tweet_path(tweet.id), class: 'Information-top' do
+              .Posts__name-top
+                = tweet.title
+              .Information-top-star
+                おすすめ度
+              .Information_star-raty{id:"star-rate-#{tweet.id}"}
+
+              :javascript
+                $('#star-rate-#{tweet.id}').raty({
+                  size: 36,
+                  starOff: "#{asset_path('star-off.png')}",
+                  starOn: "#{asset_path('star-on.png')}",
+                  starHalf: "#{asset_path('star-half.png')}",
+                  half: true,
+                  readOnly: true,
+                  score: "#{tweet.rate}"
+                });
+
+              .Information__likes-comments-top
+                = icon('fas', 'heart fa-lg heart_red')
+                = "#{tweet.likes.length}件"
+                = "コメント#{tweet.comments.length}件"
+    .Contents__post-main
+      おすすめ度4以上の作品
+      .Post-genre-all
+        - @likes.each do |like|
+          .Picture-top
+            = image_tag like.image.url, class: 'Picture-home' if like.image.present?
+            = link_to tweet_path(like.id), class: 'Information-top' do
+              .Posts__name-top
+                = like.title
+              .Information-top-star
+                おすすめ度
+              .Information_star-raty{id:"star-rate-#{like.id}"}
+
+              :javascript
+                $('#star-rate-#{like.id}').raty({
+                  size: 36,
+                  starOff: "#{asset_path('star-off.png')}",
+                  starOn: "#{asset_path('star-on.png')}",
+                  starHalf: "#{asset_path('star-half.png')}",
+                  half: true,
+                  readOnly: true,
+                  score: "#{like.rate}"
+                });
+
+              .Information__likes-comments-top
+                = icon('fas', 'heart fa-lg heart_red')
+                = "#{like.likes.length}件"
+                = "コメント#{like.comments.length}件"

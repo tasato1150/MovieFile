@@ -1,0 +1,8 @@
+- if tweet.like_user(current_user.id)
+  = link_to tweet_like_path(tweet.likes, tweet_id: tweet.id), method: :delete, class: 'like-icon', remote: true do
+    = icon('fas', 'heart fa-lg heart_red')
+    = tweet.likes.count
+- else
+  = link_to tweet_likes_path(tweet.id), method: :post, class: 'like-icon', remote: true do
+    = icon('far', 'heart fa-lg')
+    = tweet.likes.count

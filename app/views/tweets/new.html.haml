@@ -1,0 +1,8 @@
+.wrapper
+  = render "side"
+  .Main
+    .NewPage
+      .NewPage__box
+        .NewPage__title
+          %h2 投稿する
+        = render "form", locals: { tweet: @tweet }

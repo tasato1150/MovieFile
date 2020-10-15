@@ -1,0 +1,503 @@
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.Side {
+  width: 250px;
+  &__header {
+    color: #fff;
+    background-color: #333333;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+}
+
+.Title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.side a :hover {
+  opacity: 0.5;
+}
+
+.List li:hover {
+  opacity: 0.5;
+}
+
+.List {
+  height: calc(100vh - 50px);
+  font-size: 20px;
+  background-color: #555555;
+  overflow: scroll;
+  padding: 10px 0 10px 50px;
+  &__btn a {
+    color: #fff;
+  }
+  &__btn {
+    width: 160px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 20px;
+    color: #555555;
+    border: 0;
+    font-size: 18px;
+  }
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &__menu li {
+    color: #fff;
+  }
+  &__home {
+    margin-top: 20px;
+  }
+  &__mypage {
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+  &__like {
+    margin-top: 30px;
+  }
+  &__logout {
+    margin-top: 30px;
+  }
+  &__genre {
+    margin-top: 40px;
+    color: #fff;
+  }
+  &__genre li {
+    font-size: 17px;
+    margin-top: 10px;
+  }
+  &__genre p {
+    margin-bottom: 30px;
+  }
+}
+
+.like-icon .fas {
+  padding-right: 10px;
+}
+
+.like-icon .far {
+  padding-right: 10px;
+}
+
+.heart_red {
+  color: red;
+}
+
+#like_red {
+  color: red;
+}
+
+.Main {
+  width: calc(100vw - 250px);
+  background-color: #222222;
+  overflow: scroll;
+  height: 100vh;
+}
+
+.Search-box {
+  text-align: center;
+  height: 50px;
+  background-color: #AAAAAA;
+  position: relative;
+  &__input {
+    position: absolute;
+    top: 12.5px;
+    right: 10px;
+    width: 35%;
+    height: 25px;
+    padding: 0 50px 0 10px;
+    border: #fff solid 1px;
+    border-radius: 20px;
+    outline: none;
+  }
+  &__btn {
+    position: absolute;
+    top: 12.5px;
+    right: 10px;
+    width: 40px;
+    height: 25px;
+    background-color: #222222;
+    text-align: center;
+    color: #fff;
+    border: #222222 solid 1px;
+    padding-top: 3px;
+    border-radius: 0 20px 20px 0;
+  }
+}
+
+input::placeholder {
+  color: #222222;
+}
+
+.Contents {
+  height: calc(100vh - 100px);
+  &__post {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__post-main {
+    flex-wrap: wrap;
+    margin-top: 50px;
+    padding-left: 30px;
+    color: #fff;
+    overflow: auto;
+    scroll-snap-type: x;
+  }
+}
+
+.Post-genre-all {
+  display: flex;
+  margin-top: 10px;
+}
+
+.Posts {
+  padding: 0 10px 10px 10px;
+  box-shadow: 0 0 10px rgba(41,41,41,0.2);
+  margin: 20px 0;
+  width: 420px;
+  &-show {
+    padding: 0 10px 10px 10px;
+    box-shadow: 0 0 10px rgba(41,41,41,0.2);
+    margin: 20px 0;
+    width: 720px;
+  }
+  &-mypage {
+    padding: 0 10px 10px 10px;
+    box-shadow: 0 0 10px rgba(41,41,41,0.2);
+    margin: 20px 0;
+    width: 720px;
+  }
+  &__name {
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    &-top {
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  }
+  &-main {
+    margin: 10px 20px;
+    &-post {
+    padding: 0 10px 10px 10px;
+    box-shadow: 0 0 10px rgba(41,41,41,0.2);
+    width: 220px;
+    height: 350px;
+    background-color: #fff;
+    }
+  }
+}
+
+.Information {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #fff;
+  &__recommend {
+    display: flex;
+    align-items: center;
+    &-evaluation {
+      margin: 0 5px;
+      color: lightcoral;
+      font-size: 40px;
+      font-weight: bold;
+    }
+  }
+  &__contents {
+    font-size: 20px;
+    color: #fff;
+    font-weight: bold;
+    &-name {
+      font-weight: bold;
+    }
+    &-text {
+      width: 600px;
+      word-wrap : break-word;
+      overflow-wrap : break-word;
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+  &__text {
+    display: flex;
+    align-items: center;
+  }
+  &__likes-comments {
+    font-size: 12px;
+    &-top {
+      font-size: 12px;
+      margin-top: 15px;
+    }
+  }
+  &__like-button {
+    display: flex;
+  }
+}
+
+.NewPage {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 660px;
+  &__box {
+    margin: 20px 0;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(41,41,41,0.2);
+    background-color: white;
+    box-sizing: border-box;
+  }
+}
+
+.NewPage__title {
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  h2 {
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+    font-size: 40px;
+    color: #222222;
+  }
+}
+
+.Form__contents-evaluation {
+  width: 105px;
+  height: 50px;
+}
+
+.Form__contents {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+.FormField {
+  margin-bottom: 10px;
+}
+
+#tweet_text {
+  height: 350px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#tweet_evaluation {
+  margin-top: 20px;
+}
+
+#comment_text {
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+#tweet_title {
+  width: 100%;
+  margin-bottom: 20px;
+  height: 40px;
+  border: 1px solid #222222;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+#tweet_category {
+  margin-bottom: 20px;
+}
+
+#tweet_date {
+  margin-bottom: 25px;
+  height: 25px;
+  width: 160px;
+  text-align: center;
+}
+
+#tweet_image {
+  margin-bottom: 20px;
+}
+
+#star {
+  margin-bottom: 15px;
+}
+
+.Form__checkbox {
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+input[type="checkbox"] {
+  margin: 0 2px 0 5px;
+}
+
+label {
+  width: 50%;
+  color: #222222;
+}
+
+.Image-tag {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 5px;
+  color: #222222;
+  text-decoration: none;
+  text-align: center;
+}
+
+.button {
+  background-color: #555555;
+  color: #fff;
+  width: 100%;
+  height: 50px;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+::placeholder {
+  color: #222222;
+}
+
+textarea {
+  width: auto;
+  height: auto;
+  color: #222222;
+  border: 1px solid #222222;
+  border-radius: 5px;
+  padding: 5px 5px;
+}
+
+.tweet_text {
+  width: 500px;
+}
+
+.userName {
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  height: 100px;
+  line-height: 100px;
+  padding-right: 100px;
+  border-bottom:1px solid #222222;
+  border-top: 1px solid #222222;
+}
+
+.DestroyEdit {
+  display: flex;
+  justify-content: space-around;
+  &__Edit-btn {
+    width: 100px;
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    color: #222222;
+    border: #222222 solid 2px;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  &__Destroy-btn {
+    width: 100px;
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    color: #222222;
+    border: #222222 solid 2px;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+}
+
+.Comments {
+  width: 720px;
+  box-shadow: 0 0 10px rgba(41,41,41,0.2);
+  padding: 15px;
+  margin-bottom: 20px;
+  &__Form {
+    display: flex;
+    flex-direction: column;
+  }
+  &__list {
+    padding-top: 25px;
+    overflow: scroll;
+    &-comment {
+      padding-bottom: 20px;
+    }
+  }
+}
+
+h4 {
+  color: #222222;
+  font-weight: bold;
+  font-size: 17px;
+  padding-bottom: 15px;
+}
+
+.Picture {
+  text-align: center;
+  max-width: 700px;
+  &-home {
+    text-align: center;
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
+  }
+}
+
+.Picture-top {
+  width: 250px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  margin-right: 20px;
+  min-width: 250px;
+}
+
+.Information-top {
+  width: 250px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Information-top:hover {
+  opacity: 1;
+  transition: all 0.6s ease;
+  padding-bottom: 0;
+}
+
+.Picture-top:hover .hover-mask {
+  padding-bottom: 30px;
+}

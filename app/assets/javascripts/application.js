@@ -1,4 +1,4 @@
 //= require jquery
 //= require rails-ujs
-//= require jquery.raty.js
+//= require jquery.raty
 //= require_tree .

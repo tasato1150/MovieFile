@@ -148,7 +148,6 @@ input::placeholder {
 }
 
 .Contents {
-  height: calc(100vh - 100px);
   &__post {
     display: flex;
     align-items: center;
@@ -162,12 +161,26 @@ input::placeholder {
     overflow: auto;
     scroll-snap-type: x;
   }
+  &__post-main:last-child {
+    margin-bottom: 50px;
+  }
 }
 
 .Post-genre-all {
   display: flex;
   margin-top: 10px;
 }
+
+.Post-genre-raty {
+  display: flex;
+  margin-top: 10px;
+}
+
+.Post-genre-like {
+  display: flex;
+  margin-top: 10px;
+}
+
 
 .Posts {
   padding: 0 10px 10px 10px;

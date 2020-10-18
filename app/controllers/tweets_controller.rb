@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
   def index
     @tweet = Tweet.new
     @tweets = Tweet.includes(:user).order("created_at DESC")
-    @likes = Tweet.where(rate: '4').or(Tweet.where(rate: '5'))
+    @likes = Tweet.where(rate: '4').or(Tweet.where(rate: '4.5')).or(Tweet.where(rate: '5')).order("rate DESC")
   end
 
   def new

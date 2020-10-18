@@ -34,29 +34,57 @@
                 = "コメント#{tweet.comments.length}件"
     .Contents__post-main
       おすすめ度4以上の作品
-      .Post-genre-all
-        - @likes.each do |like|
+      .Post-genre-raty
+        - @likes.each do |tweet|
           .Picture-top
-            = image_tag like.image.url, class: 'Picture-home' if like.image.present?
-            = link_to tweet_path(like.id), class: 'Information-top' do
+            = image_tag tweet.image.url, class: 'Picture-home' if tweet.image.present?
+            = link_to tweet_path(tweet.id), class: 'Information-top' do
               .Posts__name-top
-                = like.title
+                = tweet.title
               .Information-top-star
                 おすすめ度
-              .Information_star-raty{id:"star-rate-#{like.id}"}
+              .Information_star-raty{id:"star-#{tweet.id}"}
 
               :javascript
-                $('#star-rate-#{like.id}').raty({
+                $('#star-#{tweet.id}').raty({
                   size: 36,
                   starOff: "#{asset_path('star-off.png')}",
                   starOn: "#{asset_path('star-on.png')}",
                   starHalf: "#{asset_path('star-half.png')}",
                   half: true,
                   readOnly: true,
-                  score: "#{like.rate}"
+                  score: "#{tweet.rate}"
                 });
 
               .Information__likes-comments-top
                 = icon('fas', 'heart fa-lg heart_red')
-                = "#{like.likes.length}件"
-                = "コメント#{like.comments.length}件"
+                = "#{tweet.likes.length}件"
+                = "コメント#{tweet.comments.length}件"
+    .Contents__post-main
+      = "#{current_user.name}さんがいいねした作品"
+      .Post-genre-like
+        - current_user.like_tweets.each do |tweet|
+          .Picture-top
+            = image_tag tweet.image.url, class: 'Picture-home' if tweet.image.present?
+            = link_to tweet_path(tweet.id), class: 'Information-top' do
+              .Posts__name-top
+                = tweet.title
+              .Information-top-star
+                おすすめ度
+              .Information_star-raty{id:"star-like#{tweet.id}"}
+
+              :javascript
+                $('#star-like#{tweet.id}').raty({
+                  size: 36,
+                  starOff: "#{asset_path('star-off.png')}",
+                  starOn: "#{asset_path('star-on.png')}",
+                  starHalf: "#{asset_path('star-half.png')}",
+                  half: true,
+                  readOnly: true,
+                  score: "#{tweet.rate}"
+                });
+
+              .Information__likes-comments-top
+                = icon('fas', 'heart fa-lg heart_red')
+                = "#{tweet.likes.length}件"
+                = "コメント#{tweet.comments.length}件"

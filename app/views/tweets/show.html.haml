@@ -49,5 +49,4 @@
                 .Comments__list-comment
                   = link_to "/users/#{comment.user_id}" do
                     = comment.user.name
-                  ：
-                  = comment.text
+                  %span= "： #{comment.text}"

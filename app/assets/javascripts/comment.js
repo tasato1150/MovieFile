@@ -1,11 +1,9 @@
 $(function(){
   function buildHTML(comment){
-    let html =`<p>
-                <strong>
-                  <a href=/users/${comment.user_id}>${comment.user_name}</a>：
-                </strong>
-                ${comment.text}
-              </p>`
+    let html =`<div class="Comments__list-comment">
+                <a href=/users/${comment.user_id}>${comment.user_name}</a>
+                <span>： ${comment.text}</span>
+               </div>`
     return html;
   }
   $('#new_comment').on('submit', function(e){

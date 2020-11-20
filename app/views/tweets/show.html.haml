@@ -28,6 +28,8 @@
           .Information__contents
             .Information__Genre
               ジャンル：
+              - @tweet.tweet_genres.each do |tweet|
+                = link_to "#{tweet.genre.name}", "/genres/#{tweet.genre.id}"
             .Information__create-at
               観賞日：
             .Information__user
@@ -50,3 +52,11 @@
                   = link_to "/users/#{comment.user_id}" do
                     = comment.user.name
                   %span= "： #{comment.text}"
+      - if user_signed_in? && current_user.id == @tweet.user_id
+        .DestroyEdit
+          = link_to edit_tweet_path(@tweet.id), method: :get do
+            .DestroyEdit__Edit-btn
+              編集
+          = link_to tweet_path(@tweet.id), method: :delete, data: {confirm: '削除しますか？'}  do
+            .DestroyEdit__Destroy-btn
+              削除

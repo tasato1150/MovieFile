@@ -1,18 +1,46 @@
 .wrapper
   = render "tweets/side"
   .Main
-    %p.userName= "#{@name}さんの投稿一覧"
-    .Contents
-      .Contents__post
+    - if current_user.id == @user_id
+      .Contents
+        %p.userName= "#{@name}さんがいいねした作品"
+        .Post-genre-like
+          - current_user.like_tweets.each do |tweet|
+            .Picture-top
+              = image_tag tweet.image.url, class: 'Picture-home' if tweet.image.present?
+              = link_to tweet_path(tweet.id), class: 'Information-top' do
+                .Posts__name-top
+                  = tweet.title
+                .Information-top-star
+                  おすすめ度
+                .Information_star-raty{id:"star-like#{tweet.id}"}
+
+                :javascript
+                  $('#star-like#{tweet.id}').raty({
+                    size: 36,
+                    starOff: "#{asset_path('star-off.png')}",
+                    starOn: "#{asset_path('star-on.png')}",
+                    starHalf: "#{asset_path('star-half.png')}",
+                    half: true,
+                    readOnly: true,
+                    score: "#{tweet.rate}"
+                  });
+
+                .Information__likes-comments-top
+                  = icon('fas', 'heart fa-lg heart_red')
+                  = "#{tweet.likes.length}件"
+                  = "コメント#{tweet.comments.length}件"
+    .contents
+      %p.userName= "#{@name}さんの投稿一覧"
+      .Post-genre-all
         - @tweets.each do |tweet|
-          .Posts-mypage
-            .Posts__name
-              = link_to tweet_path(tweet.id), class: 'Posts__name' do
+          .Picture-top
+            = image_tag tweet.image.url, class: 'Picture-home' if tweet.image.present?
+            = link_to tweet_path(tweet.id), class: 'Information-top' do
+              .Posts__name-top
                 = tweet.title
-            %p.Picture
-              = link_to tweet_path(tweet.id) do
-                = image_tag tweet.image.url, class: 'Picture' if tweet.image.present?
-            .Information
+              .Information-top-star
+                おすすめ度
               .Information_star-raty{id:"star-rate-#{tweet.id}"}
 
               :javascript
@@ -26,13 +54,7 @@
                   score: "#{tweet.rate}"
                 });
 
-              .Information__likes-comments
-                = "#{tweet.likes.length}件のいいね #{tweet.comments.length}件のコメント"
-            - if user_signed_in? && current_user.id == tweet.user_id
-              .DestroyEdit
-                = link_to edit_tweet_path(tweet.id), method: :get do
-                  .DestroyEdit__Edit-btn
-                    編集
-                = link_to tweet_path(tweet.id), method: :delete do
-                  .DestroyEdit__Destroy-btn
-                    削除
+              .Information__likes-comments-top
+                = icon('fas', 'heart fa-lg heart_red')
+                = "#{tweet.likes.length}件"
+                = "コメント#{tweet.comments.length}件"

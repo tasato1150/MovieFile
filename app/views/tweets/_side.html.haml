@@ -10,14 +10,29 @@
         = link_to root_path do
           = icon('fas', 'home fa-lg')
           ホーム
-      %li.List__mypage
-        = link_to "/users/#{current_user.id}" do
-          = icon('fas', 'user-alt fa-lg')
-          マイページ
+      - if user_signed_in?
+        %li.List__mypage
+          = link_to "/users/#{current_user.id}" do
+            = icon('fas', 'user-alt fa-lg')
+            マイページ
+      - else
+        %li.List__session
+          = link_to new_user_session_path do
+            = icon('fas', 'sign-in-alt fa-lg')
+            ログイン
+        %li.List__registration
+          = link_to new_user_registration_path do
+            = icon('fas', 'user-plus fa-lg')
+            新規登録
       %li
-        = link_to new_tweet_path do
-          .List__btn
-            投稿する
+        - if user_signed_in?
+          = link_to new_tweet_path do
+            .List__btn
+              投稿する
+        - else
+          = link_to new_user_registration_path do
+            .List__btn
+              投稿する
       %ul.List__genre
         %p ジャンル一覧
         %li= link_to "アクション", "/genres/1", class: "action"
@@ -33,7 +48,8 @@
         %li= link_to "ミュージカル", "/genres/11"
         %li= link_to "ドキュメンタリー", "/genres/12"
         %li= link_to "戦争", "/genres/13"
-      %li.List__logout
-        = link_to destroy_user_session_path, method: :delete do
-          = icon('fas', 'sign-out-alt fa-lg')
-          ログアウト
+      - if user_signed_in?
+        %li.List__logout
+          = link_to destroy_user_session_path, method: :delete, data: {confirm: 'ログアウトしますか？'} do
+            = icon('fas', 'sign-out-alt fa-lg')
+            ログアウト

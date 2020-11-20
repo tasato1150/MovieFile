@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     @name = user.name
     @tweets = user.tweets
+    @user_id = user.id
   end
 
   private

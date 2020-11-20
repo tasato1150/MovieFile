@@ -53,7 +53,10 @@ a {
     }
     &__mypage {
       margin-top: 30px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
+    }
+    &__registration {
+      margin-bottom: 30px;
     }
     &__like {
       margin-top: 30px;
@@ -61,8 +64,14 @@ a {
     &__logout {
       margin-top: 30px;
     }
+    &__session {
+      margin: 30px 0 10px 0;
+      .fa-sign-in-alt {
+        margin-right: 6px;
+      }
+    }
     &__genre {
-      margin-top: 40px;
+      margin-top: 30px;
       color: #fff;
     }
     &__genre li {
@@ -138,6 +147,7 @@ a {
     }
   }
   .Contents {
+    padding-right: 20px;
     &__post {
       display: flex;
       align-items: center;
@@ -146,11 +156,12 @@ a {
     }
     &__post-main {
       flex-wrap: wrap;
-      margin-top: 50px;
-      padding-left: 30px;
+      padding: 30px 0 0 10px;
       color: #fff;
-      overflow: auto;
-      scroll-snap-type: x;
+      max-width: 1190px;
+      h2 {
+        padding-left: 20px;
+      }
     }
     &__post-main:last-child {
       margin-bottom: 50px;
@@ -164,14 +175,15 @@ input::placeholder {
 
 .Post-genre-all {
   display: flex;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  align-content: space-between;
+  max-height: 720px;
   .Picture-top {
-    width: 250px;
     height: 200px;
+    min-width: 250px;
     position: relative;
     overflow: hidden;
-    margin-right: 20px;
-    min-width: 250px;
+    margin: 20px;
     .Information-top {
       width: 250px;
       height: 200px;
@@ -201,13 +213,12 @@ input::placeholder {
 
 .Post-genre-raty {
   display: flex;
-  margin-top: 10px;
+  overflow-y: scroll;
   .Picture-top {
-    width: 250px;
     height: 200px;
     position: relative;
     overflow: hidden;
-    margin-right: 20px;
+    margin: 20px;
     min-width: 250px;
     .Information-top {
       width: 250px;
@@ -238,13 +249,12 @@ input::placeholder {
 
 .Post-genre-like {
   display: flex;
-  margin-top: 10px;
+  overflow-y: scroll;
   .Picture-top {
-    width: 250px;
     height: 200px;
     position: relative;
     overflow: hidden;
-    margin-right: 20px;
+    margin: 20px;
     min-width: 250px;
     .Information-top {
       width: 250px;
@@ -298,7 +308,6 @@ input::placeholder {
   display: flex;
   justify-content: space-between;
   font-weight: bold;
-  color: #fff;
   &__recommend {
     display: flex;
     align-items: center;
@@ -313,6 +322,9 @@ input::placeholder {
     font-size: 20px;
     color: #fff;
     font-weight: bold;
+    a:hover {
+      opacity: 0.5;
+    }
     &-name {
       font-weight: bold;
     }
@@ -320,8 +332,8 @@ input::placeholder {
       width: 600px;
       word-wrap : break-word;
       overflow-wrap : break-word;
-      color: #fff;
       font-size: 18px;
+      padding: 0 10px;
     }
   }
   &__text {
@@ -490,9 +502,10 @@ textarea {
 
 .DestroyEdit {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  margin-bottom: 20px;
   &__Edit-btn {
-    width: 100px;
+    width: 350px;
     padding: 10px;
     background-color: #fff;
     text-align: center;
@@ -500,10 +513,10 @@ textarea {
     color: #222222;
     border: #222222 solid 2px;
     font-size: 18px;
-    margin-top: 10px;
+    margin-right: 10px;
   }
   &__Destroy-btn {
-    width: 100px;
+    width: 350px;
     padding: 10px;
     background-color: #fff;
     text-align: center;
@@ -511,7 +524,7 @@ textarea {
     color: #222222;
     border: #222222 solid 2px;
     font-size: 18px;
-    margin-top: 10px;
+    margin-left: 10px;
   }
 }
 

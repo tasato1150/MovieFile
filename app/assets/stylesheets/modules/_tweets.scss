@@ -247,6 +247,42 @@ input::placeholder {
   }
 }
 
+.Post-genre-likes {
+  display: flex;
+  overflow-y: scroll;
+  .Picture-top {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    margin: 20px;
+    min-width: 250px;
+    .Information-top {
+      width: 250px;
+      height: 200px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.5);
+      opacity: 0;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .Information-top:hover {
+      opacity: 1;
+      transition: all 0.6s ease;
+      padding-bottom: 0;
+    }
+    .Picture-top:hover .hover-mask {
+      padding-bottom: 30px;
+    }
+  }
+}
+
 .Post-genre-like {
   display: flex;
   overflow-y: scroll;
@@ -495,7 +531,7 @@ textarea {
   font-size: 20px;
   height: 100px;
   line-height: 100px;
-  padding-right: 100px;
+  padding-right: 120px;
   border-bottom:1px solid #222222;
   border-top: 1px solid #222222;
 }

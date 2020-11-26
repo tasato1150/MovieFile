@@ -35,7 +35,8 @@
               投稿する
       %ul.List__genre
         %p ジャンル一覧
-        %li= link_to "アクション", "/genres/1", class: "action"
+        %li= link_to "全て", genres_path, class: "action"
+        %li= link_to "アクション", "/genres/1"
         %li= link_to "SF", "/genres/2"
         %li= link_to "アドベンチャー", "/genres/3"
         %li= link_to "ヒューマンドラマ", "/genres/4"

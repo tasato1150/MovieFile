@@ -3,8 +3,9 @@ class TweetsController < ApplicationController
 
   def index
     @tweet = Tweet.new
-    @tweets = Tweet.includes(:user).order("created_at DESC")
+    @tweets = Tweet.includes(:user).order("created_at DESC").limit(20)
     @likes = Tweet.where(rate: '4').or(Tweet.where(rate: '4.5')).or(Tweet.where(rate: '5')).order("rate DESC")
+    @likes_ranks = Tweet.find(Like.group(:tweet_id).order('count(tweet_id) desc').limit(10).pluck(:tweet_id))
   end
 
   def new
@@ -50,7 +51,7 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:text, :image, :title, :rate, {genre_ids: []}).merge(user_id: current_user.id)
+    params.require(:tweet).permit(:text, :image, :title, :rate, :date, {genre_ids: []}).merge(user_id: current_user.id)
   end
 
   def set_tweet

@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2020_10_07_181935) do
     t.string "image"
     t.string "title"
     t.float "rate"
+    t.date "date"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

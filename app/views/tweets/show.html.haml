@@ -8,7 +8,10 @@
           .Posts__name
             = @tweet.title
           %p.Picture
-            = image_tag @tweet.image.url, class: 'Picture' if @tweet.image.present?
+            = image_tag @tweet.images[0].src.url, class: 'Picture'
+            %ul
+              - @tweet.images.each do |tweet|
+                %li= image_tag tweet.src.url, class: "Picture__sub"
           .Information
             .Information_star-raty{id:"star-rate-#{@tweet.id}"}
 

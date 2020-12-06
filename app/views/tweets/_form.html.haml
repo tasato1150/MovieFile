@@ -4,14 +4,25 @@
       .Form__contents-title
         = f.label :title, 'タイトル'
         = f.text_field :title
+      %div#image-box
+        = f.fields_for :images do |image|
+          %div{id:"data-index#{image.index}", class:"js-file_group"}
+            = image.file_field :src, class: 'js-file', data: {index: image.index}, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+            %br/
+            %span.js-remove
+            削除
+          - if @tweet.persisted?
+            = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+        - if @tweet.persisted?
+          %div{id:"data-index#{@tweet.images.count}", class:"js-file_group"}
+            = file_field_tag :src, class: 'js-file', name: "tweet[images_attributes][#{@tweet.images.count}][src]"
+            %span.js-remove
+            削除
       .Form__cntents-genre
         = f.label :genre, 'ジャンル(複数選択可)'
       .Form__checkbox
         = collection_check_boxes :tweet, :genre_ids, Genre.all, :id, :name do |g|
           = g.label {g.check_box + g.text}
-      .Form__contens-image
-        = f.label :image, '画像アップロード'
-        %p= f.file_field :image, class: 'Image'
       .Form__contents-evaluation#star
         = f.label :rate, 'おすすめ度'
         %p= f.hidden_field :rate, id: :raty_star

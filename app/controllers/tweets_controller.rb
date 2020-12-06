@@ -3,23 +3,24 @@ class TweetsController < ApplicationController
 
   def index
     @tweet = Tweet.new
-    @tweets = Tweet.includes(:user).order("created_at DESC").limit(20)
+    @tweets = Tweet.includes(:user, :images).order("created_at DESC").limit(20)
     @likes = Tweet.where(rate: '4').or(Tweet.where(rate: '4.5')).or(Tweet.where(rate: '5')).order("rate DESC")
     @likes_ranks = Tweet.find(Like.group(:tweet_id).order('count(tweet_id) desc').limit(10).pluck(:tweet_id))
   end
 
   def new
     @tweet = Tweet.new
+    @tweet.images.new
     @genres = Genre.all
   end
 
   def create
     @tweet = Tweet.create(tweet_params)
     if @tweet.save
-      redirect_to root_path, notice: '投稿完了しました'
+      redirect_to root_path
     else
-      flash.now[:alert] = '※必須項目を入力してください（タイトル/おすすめ度/画像）'
-      render "/tweets/new"
+      flash.now[:alert] = '※必須項目を入力してください（タイトル/おすすめ度）'
+      render :new
     end
   end
 
@@ -51,7 +52,7 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:text, :image, :title, :rate, :date, {genre_ids: []}).merge(user_id: current_user.id)
+    params.require(:tweet).permit(:text, :image, :title, :rate, :date, {genre_ids: []}, images_attributes: [:src, :_destroy, :id]).merge(user_id: current_user.id)
   end
 
   def set_tweet

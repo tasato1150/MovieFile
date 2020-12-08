@@ -332,17 +332,45 @@ input::placeholder {
     padding: 0 10px 10px 10px;
     box-shadow: 0 0 10px rgba(41,41,41,0.2);
     margin: 20px 0;
-    width: 720px;
+    width: 600px;
   }
   &__name {
     color: #fff;
     font-size: 18px;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
     &-top {
       color: #fff;
       font-weight: bold;
       margin-bottom: 20px;
+    }
+  }
+  &__picture {
+    margin: 16px 0 20px 0;
+    & ul li {
+    display: flex;
+    flex-direction: column;
+    width: 560px;
+    align-items: center;
+    margin: 0 auto;
+    }
+    ul>li img {
+      object-fit: cover;
+      height: 346px;
+    }
+    ul>li ul {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    ul>li>ul li {
+      width: 25%;
+      margin: 0 5px 0 5px;
+    }
+    ul li>ul li img {
+      object-fit: cover;
+      height: 87px;
+      width: 95px;
     }
   }
 }
@@ -538,7 +566,6 @@ textarea {
   font-size: 20px;
   height: 60px;
   line-height: 80px;
-  padding-right: 120px;
   border-bottom:1px solid #222222;
   border-top: 1px solid #222222;
 }
@@ -548,7 +575,7 @@ textarea {
   justify-content: center;
   margin-bottom: 20px;
   &__Edit-btn {
-    width: 350px;
+    width: 290px;
     padding: 10px;
     background-color: #fff;
     text-align: center;
@@ -559,7 +586,7 @@ textarea {
     margin-right: 10px;
   }
   &__Destroy-btn {
-    width: 350px;
+    width: 290px;
     padding: 10px;
     background-color: #fff;
     text-align: center;
@@ -572,7 +599,7 @@ textarea {
 }
 
 .Comments {
-  width: 720px;
+  width: 600px;
   box-shadow: 0 0 10px rgba(41,41,41,0.2);
   padding: 15px;
   margin-bottom: 20px;
@@ -601,9 +628,6 @@ h4 {
 }
 
 .Picture {
-  text-align: center;
-  max-width: 600px;
-  object-fit: cover;
   &__sub {
     max-width: 200px;
     object-fit: cover;

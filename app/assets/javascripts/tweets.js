@@ -7,23 +7,37 @@ $(document).on('turbolinks:load', ()=> {
                     id="tweet_images_attributes_${index}_src"
                     accept="image/jpg,image/jpeg,image/png,image/gif
                     data-index="${index}">
-                    <br>
-                    <span class="js-remove">削除</span>
+                  </div>`;
+    return html;
+  }
+  // プレビュー用のimgタグを生成する関数
+  const buildImg = (num, url)=> {
+    const html = `<div class="Image__show" id="image_box_${num}">
+                    <img data-index="${num}" src="${url}" class="image-file" width="100px" height="100px">
+                      <div class="content">
+                        <div id="js-remove_${num}" class="js-remove" data-index="${num}" >削除</div>
+                      </div>
                   </div>`;
     return html;
   }
 
-  const buildImg = (index, url)=> {
-    const html = `<img data-index="${index}" src="${url}" width="100px" height="100px">`;
-    return html;
-  }
-
+  var count = $('.image-file').length;
+  if (count == 5){
+    $('.Image__previews').toggle(false);
+    }
   // file_fieldのnameに動的なindexをつける為の配列
   let fileIndex = [1,2,3,4,5,6,7,8,9,10];
   // 既に使われているindexを除外
   lastIndex = $('.js-file_group:last').data('index');
   fileIndex.splice(0, lastIndex);
-  $('.hidden-destroy').hide();
+
+  $('.hidden').hide();
+  $('.Image__previews').on('click', function(e){
+    // インプットボックスの最後のカスタムデータID取得
+    const file_field = $('input[type="file"]:last');
+    //クリックによって最後のフォームが選択される
+    file_field.trigger('click');
+  });
 
   $('#image-box').on('change', '.js-file', function(e) {
     const targetIndex = $(this).parent().data('index');
@@ -52,7 +66,22 @@ $(document).on('turbolinks:load', ()=> {
 
     $(this).parent().remove();
     $(`img[data-index="${targetIndex}"]`).remove();
+
     // 画像入力欄が0個にならないようにしておく
     if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
+  });
+
+  $('#previews').on('click', '.js-remove', function() {
+    const image = $(this).parent().parent();
+    image.remove();
+    const data_index = $(this).data('index');
+    const hiddenCheck = $(`input[data-index="${data_index}"].hidden`);
+    if (hiddenCheck) hiddenCheck.prop('checked', true);
+    $(`img[data-index="${data_index}"]`).remove();
+    if ($('.ImageFile').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
+    var count = $('.image-file').length;
+    if (count == 4){
+    $('.Image__previews').toggle(true);
+    } 
   });
 });

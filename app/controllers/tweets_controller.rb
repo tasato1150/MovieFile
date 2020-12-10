@@ -27,7 +27,7 @@ class TweetsController < ApplicationController
   def destroy
     tweet = Tweet.find(params[:id])
     tweet.destroy
-    redirect_to "/users/#{current_user.id}"
+    redirect_to root_path
   end
 
   def edit

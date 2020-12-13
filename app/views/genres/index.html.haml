@@ -7,7 +7,7 @@
         .Post-genre-all
           - @tweets.each do |tweet|
             .Picture-top
-              = image_tag tweet.image.url, class: 'Picture-home' if tweet.image.present?
+              = image_tag tweet.images[0].src.url, class: 'Picture-home'
               = link_to tweet_path(tweet.id), class: 'Information-top' do
                 .Posts__name-top
                   = tweet.title

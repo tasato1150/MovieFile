@@ -19,8 +19,12 @@ class TweetsController < ApplicationController
     if @tweet.save
       redirect_to root_path
     else
-      flash.now[:alert] = '※必須項目を入力してください（タイトル/おすすめ度）'
-      render :new
+      unless @tweet.images.present?
+        @tweet.images.new
+        render :new
+      else
+        render :new
+      end
     end
   end
 

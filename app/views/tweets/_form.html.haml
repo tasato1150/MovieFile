@@ -25,9 +25,10 @@
       .Form__checkbox
         = collection_check_boxes :tweet, :genre_ids, Genre.all, :id, :name do |g|
           = g.label {g.check_box + g.text}
-      .Form__contents-evaluation#star
+      .Form__contents-evaluation
         = f.label :rate, 'おすすめ度', class: "Form__label"
         %span.Required 必須
+      .Form__evaluation#star
         %p= f.hidden_field :rate, id: :raty_star
 
       :javascript

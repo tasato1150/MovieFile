@@ -2,19 +2,16 @@
   = form_with model: @tweet, html: {class: "Form"}, local: true do |f|
     .Form__contents
       .Form__contents-title
-        = f.label :title, 'タイトル'
+        = f.label :title, 'タイトル', class: "Form__label"
+        %span.Required 必須
         = f.text_field :title
-      .ImageSide__PhotoNumber
-        最大５枚までアップロードできます
+      .Form__cntents-image
+        = f.label :image, '画像', class: "Form__label"
+        %span.Required 必須
+        .ImageSide__PhotoNumber
+          最大５枚までアップロードできます
         %div#image-box
           %div#previews
-            - if @tweet.persisted?
-              = @tweet.images.each_with_index do |image, i|
-                .Image__show
-                  = image_tag image.src.url, data: { index: i }, class: "image-file", width: "100", height: '100'
-                  .content
-                    .div{data: {index: i},class:"js-remove"}
-                      削除
           .Image__previews
             = icon('fa', 'camera')
             .Image__previews__text
@@ -22,18 +19,15 @@
           = f.fields_for :images do |image|
             %div{id:"data-index#{image.index}", class:"js-file_group"}
               = image.file_field :src, class: 'js-file', data: {index: image.index}, accept: 'image/jpg,image/jpeg,image/png,image/gif'
-            - if @tweet.persisted?
-              = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
-          - if @tweet.persisted?
-            %div{id:"data-index#{@tweet.images.count}", class:"js-file_group"}
-              = file_field_tag :src, class: 'js-file', name: "tweet[images_attributes][#{@tweet.images.count}][src]"
       .Form__cntents-genre
-        = f.label :genre, 'ジャンル(複数選択可)'
+        = f.label :genre, 'ジャンル(複数選択可)', class: "Form__label"
+        %span.Required 必須
       .Form__checkbox
         = collection_check_boxes :tweet, :genre_ids, Genre.all, :id, :name do |g|
           = g.label {g.check_box + g.text}
       .Form__contents-evaluation#star
-        = f.label :rate, 'おすすめ度'
+        = f.label :rate, 'おすすめ度', class: "Form__label"
+        %span.Required 必須
         %p= f.hidden_field :rate, id: :raty_star
 
       :javascript
@@ -47,9 +41,9 @@
         });
 
       .Form__contents-text
-        = f.label :text, '感想'
+        = f.label :text, '感想', class: "Form__label"
         = f.text_area :text, class: 'impressions'
       .Form__contents-day
-        = f.label :date, '観賞日'
+        = f.label :date, '観賞日', class: "Form__label"
         %p= f.date_field :date
     = f.submit 'SEND', class: 'button'

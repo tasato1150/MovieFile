@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', ()=> {
   // プレビュー用のimgタグを生成する関数
   const buildImg = (num, url)=> {
     const html = `<div class="Image__show" id="image_box_${num}">
-                    <img data-index="${num}" src="${url}" class="image-file" width="100px" height="100px">
+                    <img data-index="${num}" src="${url}" class="image-file" width="110px" height="110px">
                       <div class="content">
                         <div id="js-remove_${num}" class="js-remove" data-index="${num}" >削除</div>
                       </div>
@@ -79,7 +79,7 @@ $(document).on('turbolinks:load', ()=> {
     if (hiddenCheck) hiddenCheck.prop('checked', true);
     $(`img[data-index="${data_index}"]`).remove();
     if ($('.ImageFile').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
-    var count = $('.image-file').length;
+    var count = $('.js-file').length;
     if (count == 4){
     $('.Image__previews').toggle(true);
     } 

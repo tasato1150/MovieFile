@@ -484,7 +484,7 @@ input::placeholder {
 
 #tweet_title {
   width: 100%;
-  margin-bottom: 20px;
+  margin: 10px 0 20px 0;
   height: 40px;
   border: 1px solid #222222;
   border-radius: 5px;
@@ -669,16 +669,45 @@ h4 {
 
 .js-file {
   display: none;
-}
-
-.js-file {
   width: 100%;
 }
 
+.Image__previews {
+  margin-top: 10px;
+}
+
+.js-remove {
+  text-align: center;
+  padding-top: 2px;
+}
+
 .Image__show {
-  height: 150px;
-  width: 116px;
   background-color: white;
   border: 1px solid lightgrey;
   margin: 10px 10px 0 0;
+}
+
+.ImageSide__PhotoNumber {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.Required {
+  font-size: 12px;
+  color: white;
+  background-color: red;
+  margin-left: 5px;
+  padding: 0 4px;
+  border-radius: 2px;
+  display: inline-block;
+  line-height: 1.4em;
+}
+
+.Form__label {
+  font-weight: bold;
+  line-height: 1.4em;
+}
+
+.Form__cntents-image {
+  margin-bottom: 20px;
 }

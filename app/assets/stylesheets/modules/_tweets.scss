@@ -636,57 +636,6 @@ h4 {
   }
 }
 
-.Image__previews {
-  width: 100%;
-  height: 150px;
-  font-size: 24px;
-  border: 1px dashed lightslategray;
-  background-color: whitesmoke;
-  padding: 0 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  &__text {
-    font-size: 12px;
-    line-height: 1.4em;
-    text-align: center;
-  }
-}
-
-#previews {
-  display: flex;
-}
-
-#image-box {
-  display: flex;
-}
-
-.js-file {
-  display: none;
-  width: 100%;
-}
-
-.Image__previews {
-  margin-top: 10px;
-}
-
-.js-remove {
-  text-align: center;
-  padding-top: 2px;
-}
-
-.Image__show {
-  background-color: white;
-  border: 1px solid lightgrey;
-  margin: 10px 10px 0 0;
-}
-
-.ImageSide__PhotoNumber {
-  font-size: 14px;
-  margin-top: 10px;
-}
-
 .Required {
   font-size: 12px;
   color: white;
@@ -703,19 +652,113 @@ h4 {
   line-height: 1.4em;
 }
 
-.Form__cntents-image {
-  margin-bottom: 20px;
-}
-
-.Form__cntents-genre {
-  margin-bottom: 10px;
-}
-
-
 .Form__contents-evaluation {
   margin-bottom: 10px;
 }
 
 .Form__evaluation {
   width: 102px;
+}
+
+.ImageSide__form__icon-under{
+  width: 100%;
+  font-size: 24px;
+  border:1px dashed lightslategray;
+  background-color:rgb(245, 245, 245);
+  margin-top: 10px;
+  padding:0 5px;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ErrorMessage{
+  font-size:16px;
+  font-size: initial;
+  font-weight: initial;
+  color:red;
+  margin-top: 15px;
+}
+
+.ErrorMessage__price{
+  font-size:16px;
+  color:red;
+  text-align: end;
+  font-weight: initial;
+  margin-top: 15px;
+}
+
+.ImageFile{
+  display: none;
+}
+
+.ImageSide__form__icon__text-under{
+  font-size: 12px;
+  line-height: 1.4em;
+  text-align: center;
+}
+.js-remove{
+  margin-right: auto;
+}
+
+#previews{
+  display: flex;
+}
+
+.content{
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.show-image{
+  height: 150px;
+  width: 110px;
+  background-color:white;
+  border: 1px solid lightgrey;
+  margin: 5px 10px 0 0;
+}
+
+.image-file{
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.ImageFile_group {
+  display: none;
+}
+
+.ImageSide{
+  &__label{
+    font-weight: bold;
+    line-height: 1.4em;
+  }
+  &__PhotoNumber{
+    margin: 10px 0 20px 0;
+    font-size: 14px;
+    line-height: 1.4em;
+  }
+  &__form{
+      display: flex;
+    &__icon{
+      width: 100%;
+      height: 150px;
+      font-size: 24px;
+      border: 1px dashed lightslategray;
+      background-color: whitesmoke;
+      padding: 0 5px;
+      margin-top: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      &__text{
+        font-size: 12px;
+        line-height: 1.4em;
+        text-align: center;
+      }
+    }
+  }
 }

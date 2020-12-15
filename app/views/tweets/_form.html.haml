@@ -5,30 +5,44 @@
         = f.label :title, 'タイトル', class: "Form__label"
         %span.Required 必須
         = f.text_field :title
-      .Form__cntents-image
-        = f.label :image, '画像', class: "Form__label"
-        %span.Required 必須
+      .ImageSide
+        %label.ImageSide__label
+          画像
+          %span.Required 必須
         .ImageSide__PhotoNumber
           最大５枚までアップロードできます
-        %div#image-box
-          %div#previews
-          .Image__previews
-            = icon('fa', 'camera')
-            .Image__previews__text
-              クリックしてファイルをアップロード
-          = f.fields_for :images do |image|
-            %div{id:"data-index#{image.index}", class:"js-file_group"}
-              = image.file_field :src, class: 'js-file', data: {index: image.index}, accept: 'image/jpg,image/jpeg,image/png,image/gif'
+          .ImageForm
+            .ImageSide__form
+              %div#previews
+                - if @tweet.persisted?
+                  - @tweet.images.each_with_index do |image, s|
+                    .show-image
+                      = image_tag image.src.url, data: {index: s},class:"image-file",width: '100', height: '100'
+                      .content
+                        .div{data: {index:s},class:"js-remove"}
+                          削除
+              .ImageSide__form__icon
+                = icon('fa', 'camera')
+                .ImageSide__form__icon__text
+                  クリックしてファイルをアップロード
+              %div#image-box
+          = f.fields_for :images do |i|
+            %div{id:"ImageData#{i.index}",class:"ImageFile_group"}
+              = i.file_field :src, class: "ImageFile", data: {index: i.index},accept: 'image/jpg,image/jpeg,image/png,image/gif'
+              - if @tweet.persisted?
+                = i.check_box :_destroy, data:{ index: i.index }, class: 'hidden'
+          - if @tweet.persisted?
+            %div{data: {index:@tweet.images.count},class:"ImageFile_group"}
+              = file_field_tag :src,name: "tweet[images_attributes][#{@tweet.images.count}][image]",id:"tweet_images_attributes_#{@tweet.images.count}_image", class: 'ImageFile',accept: 'image/jpg,image/jpeg,image/png,image/gif',data: {index:@tweet.images.count}
       .Form__cntents-genre
         = f.label :genre, 'ジャンル(複数選択可)', class: "Form__label"
         %span.Required 必須
       .Form__checkbox
         = collection_check_boxes :tweet, :genre_ids, Genre.all, :id, :name do |g|
           = g.label {g.check_box + g.text}
-      .Form__contents-evaluation
+      .Form__contents-evaluation#star
         = f.label :rate, 'おすすめ度', class: "Form__label"
         %span.Required 必須
-      .Form__evaluation#star
         %p= f.hidden_field :rate, id: :raty_star
 
       :javascript

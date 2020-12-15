@@ -1,76 +1,103 @@
-$(document).on('turbolinks:load', ()=> {
-  // 画像用のinputを生成する関数
-  const buildFileField = (index)=> {
-    const html = `<div data-index="${index}" class="js-file_group">
-                    <input class="js-file" type="file"
-                    name="tweet[images_attributes][${index}][src]"
-                    id="tweet_images_attributes_${index}_src"
-                    accept="image/jpg,image/jpeg,image/png,image/gif
-                    data-index="${index}">
-                  </div>`;
+$(document).on('turbolinks:load',()=>{
+  const  buildFileField = (index)=> {
+   const html =`<div data-index="${index}" class="ImageFile_group">
+                <input class="ImageFile" type="file"
+                name="tweet[images_attributes][${index}][src]"
+                id="tweet_images_attributes_${index}_src"
+                accept: 'image/jpg,image/jpeg,image/png,image/gif'
+                data-index="${index}"><br>
+              </div>`;
     return html;
   }
-  // プレビュー用のimgタグを生成する関数
   const buildImg = (num, url)=> {
-    const html = `<div class="Image__show" id="image_box_${num}">
-                    <img data-index="${num}" src="${url}" class="image-file" width="110px" height="110px">
+    const html = `<div class="show-image" id="image_box_${num}">
+                    <img data-index="${num}" src="${url}" class="image-file" width="100px" height="100px">
                       <div class="content">
-                        <div id="js-remove_${num}" class="js-remove" data-index="${num}" >削除</div>
+                        <div id="delete_btn_${num}" class="delete-btn" data-index="${num}" >削除</div>
                       </div>
                   </div>`;
     return html;
   }
-
   var count = $('.image-file').length;
   if (count == 5){
-    $('.Image__previews').toggle(false);
+    $('.ImageSide__form__icon').toggle(false);
     }
-  // file_fieldのnameに動的なindexをつける為の配列
   let fileIndex = [1,2,3,4,5,6,7,8,9,10];
-  // 既に使われているindexを除外
-  lastIndex = $('.js-file_group:last').data('index');
+  lastIndex = $('.ImageFile_group:last').data('index');
   fileIndex.splice(0, lastIndex);
-
   $('.hidden').hide();
-  $('.Image__previews').on('click', function(e){
+    //クリックしたらファイルフィールドが選択される
+  $('.ImageSide__form__icon').on('click', function(e){
     // インプットボックスの最後のカスタムデータID取得
     const file_field = $('input[type="file"]:last');
     //クリックによって最後のフォームが選択される
     file_field.trigger('click');
   });
 
-  $('#image-box').on('change', '.js-file', function(e) {
-    const targetIndex = $(this).parent().data('index');
-    // ファイルのブラウザ上でのURLを取得する
+  
+  $('.ImageSide__PhotoNumber').on('change','.ImageFile',function(e){
+    const targetIndex = $(this).data('index');
     const file = e.target.files[0];
     const blobUrl = window.URL.createObjectURL(file);
-    // 該当indexを持つimgがあれば取得して変数imgに入れる(画像変更の処理)
     if (img = $(`img[data-index="${targetIndex}"]`)[0]) {
+      img.setAttribute('src',blobUrl);
+    } else{
+    $('#previews').append(buildImg(targetIndex, blobUrl));
+    const next_index = $('input[type="file"]:last').data('index') +1;
+    $('.ImageSide__PhotoNumber').append(buildFileField(next_index));
+    fileIndex.shift();
+    fileIndex.push(fileIndex[fileIndex.length -1] + 1);
+    var count = $('.image-file').length;
+    if (count == 5){
+      $('.ImageSide__form__icon').toggle(false);
+      }
+    }
+  });
+
+
+  $('#previews').on('click', '.delete-btn', function(e){
+    //画像の削除
+    const image = $(this).parent().parent();
+    image.remove();
+    //データインデックスの取得
+    const data_index = $(this).data('index');
+    // データインデックスのカスタムデータ属性をfile_fieldに定義
+    const file_field = $(`input[type="file"][data-index="${data_index}"]`);
+    file_field.remove();
+    var count = $('.image-file').length;
+    // 画像が4以下になった時に5枚投稿された時発動した.toggle(else)を解除
+    if (count == 4){
+      $('.ImageSide__form__icon').toggle(true);
+    } 
+  });
+
+  
+  $('#previews').on('click','.eidt-btn',function(){
+    const data_index = $(this).data('index');
+    // データインデックスのカスタムデータ属性をfile_fieldに定義
+    const file_field = $(`input[type="file"][data-index="${data_index}"]`);
+    file_field.trigger('click');
+  });
+
+  $('#image-box').on('change', '.ImageFile', function(e) {
+      const targetIndex = $(this).parent().data('index');
+      // ファイルのブラウザ上でのURLを取得する
+      const file = e.target.files[0];
+      const blobUrl = window.URL.createObjectURL(file);
+      // 該当indexを持つimgタグがあれば取得して変数imgに入れる(画像変更の処理)
+      if (img = $(`img[data-index="${targetIndex}"]`)[0]) {
       img.setAttribute('src', blobUrl);
     } else {  // 新規画像追加の処理
-      $('#previews').append(buildImg(targetIndex, blobUrl));
+      $('#preview').append(buildImg(targetIndex, blobUrl));
       // fileIndexの先頭の数字を使ってinputを作る
       $('#image-box').append(buildFileField(fileIndex[0]));
       fileIndex.shift();
       // 末尾の数に1足した数を追加する
-      fileIndex.push(fileIndex[fileIndex.length - 1] + 1);
+      fileIndex.push(fileIndex[fileIndex.length - 1] + 1)
     }
   });
 
-  $('#image-box').on('click', '.js-remove', function() {
-    const targetIndex = $(this).parent().data('index');
-    // 該当indexを振られているチェックボックスを取得する
-    const hiddenCheck = $(`input[data-index="${targetIndex}"].hidden-destroy`);
-    // もしチェックボックスが存在すればチェックを入れる
-    if (hiddenCheck) hiddenCheck.prop('checked', true);
-
-    $(this).parent().remove();
-    $(`img[data-index="${targetIndex}"]`).remove();
-
-    // 画像入力欄が0個にならないようにしておく
-    if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
-  });
-
+    // 投稿された画像を削除
   $('#previews').on('click', '.js-remove', function() {
     const image = $(this).parent().parent();
     image.remove();
@@ -79,9 +106,9 @@ $(document).on('turbolinks:load', ()=> {
     if (hiddenCheck) hiddenCheck.prop('checked', true);
     $(`img[data-index="${data_index}"]`).remove();
     if ($('.ImageFile').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
-    var count = $('.js-file').length;
+    var count = $('.image-file').length;
     if (count == 4){
-    $('.Image__previews').toggle(true);
+    $('.ImageSide__form__icon').toggle(true);
     } 
   });
 });

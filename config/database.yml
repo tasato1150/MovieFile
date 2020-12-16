@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: MovieFile_production
-  username: MovieFile
-  password: <%= ENV['MOVIEFILE_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock

@@ -61,3 +61,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'jquery-rails'
 gem 'active_hash'
+
+group :production do
+  gem 'unicorn', '5.4.1'
+end

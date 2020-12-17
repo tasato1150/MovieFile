@@ -10,7 +10,7 @@
       .Post-genre-raty
         - @likes.each do |tweet|
           .Picture-top
-            = image_tag tweet.images[0].src.url, class: 'Picture-home'
+            = image_tag asset_path(tweet.images[0].src.url, class: 'Picture-home')
             = link_to tweet_path(tweet.id), class: 'Information-top' do
               .Posts__name-top
                 = tweet.title

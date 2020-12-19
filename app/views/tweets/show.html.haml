@@ -27,8 +27,13 @@
                 score: "#{@tweet.rate}"
               });
 
-            %div{id: "likes_buttons_#{@tweet.id}"}
-              = render partial: 'likes/like', locals: { tweet: @tweet } 
+            - if user_signed_in? && current_user.id
+              %div{id: "likes_buttons_#{@tweet.id}"}
+                = render partial: 'likes/like', locals: { tweet: @tweet }
+            - else
+              .like-icon
+                = icon('fas', 'heart fa-lg heart_red')
+                %span.like-count= @tweet.likes.count
           .Information__contents
             .Information__Genre
               ジャンル：
@@ -45,9 +50,12 @@
             .Information__contents-text
               = safe_join(@tweet.text.split("\n"),tag(:br))
         .Comments
-          = form_with model: [@tweet, @comment], html: {class: "Comments__Form", id: "new_comment"}, local: true do |f|
-            = f.text_area :text, placeholder: 'コメントする', class: "textbox"
-            = f.submit 'SEND', class: 'button'
+          - if user_signed_in?
+            = form_with model: [@tweet, @comment], html: {class: "Comments__Form", id: "new_comment"}, local: true do |f|
+              = f.text_area :text, placeholder: 'コメントする', class: "textbox"
+              = f.submit 'SEND', class: 'button'
+          - else
+            %p ※コメントの投稿には新規登録/ログインが必要です※
           .Comments__list
             %h4 <コメント一覧>
             - if @comments

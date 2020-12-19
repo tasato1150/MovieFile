@@ -1,7 +1,7 @@
 .wrapper
   = render "tweets/side"
   .Main
-    - if current_user.id == @user_id
+    - if user_signed_in? && current_user.id == @user_id
       .Contents
         %p.userName= "#{@name}さんがいいねした作品"
         .Contents__post-user

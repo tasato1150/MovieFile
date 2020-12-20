@@ -35,12 +35,18 @@ class TweetsController < ApplicationController
   end
 
   def edit
+    unless user_signed_in? && current_user.id == @tweet.user_id
+      redirect_to tweet_path(@tweet.id)
+    end
   end
 
   def update
-    tweet = Tweet.find(params[:id])
-    tweet.update(tweet_params)
-    redirect_to "/users/#{current_user.id}"
+    @tweet = Tweet.find(params[:id])
+    if @tweet.update(tweet_params)
+      redirect_to tweet_path(@tweet.id)
+    else
+      render :edit
+    end
   end
 
   def show

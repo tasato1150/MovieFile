@@ -7,6 +7,7 @@
   .AccountPage__form
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .FormField
+        = render 'layouts/notifications'
         .FormField__label--normal
           = f.label :email
         .FormField__input--normal

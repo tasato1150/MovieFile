@@ -6,8 +6,10 @@
   }
 
   .alert {
-    background-color: #990000;
-    color: #fff;
+    background-color: #fff;
+    color: red;
     text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
   }
 }

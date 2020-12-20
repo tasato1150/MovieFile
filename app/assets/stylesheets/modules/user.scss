@@ -144,3 +144,14 @@ h3 {
     font-size: 13px;
   }
 }
+
+.error__message {
+  display: contents;
+  margin-top: 5px;
+  color: red;
+  font-size: 14px;
+}
+
+.field_with_errors {
+  display: contents
+}

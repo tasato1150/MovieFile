@@ -456,6 +456,15 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   width: 600px;
+  &-title {
+    margin-bottom: 20px;
+  }
+  &-genre {
+    margin-bottom: 20px;
+  }
+  &-text {
+    margin-top: 20px;
+  }
 }
 
 .FormField {
@@ -479,7 +488,7 @@ input::placeholder {
 
 #tweet_title {
   width: 100%;
-  margin: 10px 0 20px 0;
+  margin: 10px 0 5px 0;
   height: 40px;
   border: 1px solid #222222;
   border-radius: 5px;
@@ -501,12 +510,8 @@ input::placeholder {
   margin-bottom: 20px;
 }
 
-#star {
-  margin-bottom: 15px;
-}
-
 .Form__checkbox {
-  margin-bottom: 20px;
+  margin-top: 10px;
   font-size: 15px;
 }
 
@@ -652,10 +657,6 @@ h4 {
   line-height: 1.4em;
 }
 
-.Form__contents-evaluation {
-  margin-bottom: 10px;
-}
-
 .Form__evaluation {
   width: 102px;
 }
@@ -749,7 +750,7 @@ h4 {
       border: 1px dashed lightslategray;
       background-color: whitesmoke;
       padding: 0 5px;
-      margin-top: 5px;
+      margin: 5px 0;
       display: flex;
       flex-direction: column;
       align-items: center;

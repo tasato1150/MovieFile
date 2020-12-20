@@ -5,6 +5,9 @@
         = f.label :title, 'タイトル', class: "Form__label"
         %span.Required 必須
         = f.text_field :title
+        .error__message
+          - if @tweet.errors.include?(:title)
+            = @tweet.errors.full_messages_for(:title).first
       .ImageSide
         %label.ImageSide__label
           画像
@@ -34,16 +37,25 @@
           - if @tweet.persisted?
             %div{data: {index:@tweet.images.count},class:"ImageFile_group"}
               = file_field_tag :src,name: "tweet[images_attributes][#{@tweet.images.count}][image]",id:"tweet_images_attributes_#{@tweet.images.count}_image", class: 'ImageFile',accept: 'image/jpg,image/jpeg,image/png,image/gif',data: {index:@tweet.images.count}
-      .Form__cntents-genre
+          .error__message
+            - if @tweet.errors.include?(:images)
+              = @tweet.errors.full_messages_for(:images).first
+      .Form__contents-genre
         = f.label :genre, 'ジャンル(複数選択可)', class: "Form__label"
         %span.Required 必須
-      .Form__checkbox
-        = collection_check_boxes :tweet, :genre_ids, Genre.all, :id, :name do |g|
-          = g.label {g.check_box + g.text}
+        .Form__checkbox
+          = collection_check_boxes :tweet, :genre_ids, Genre.all, :id, :name do |g|
+            = g.label {g.check_box + g.text}
+        .error__message
+          - if @tweet.errors.include?(:genres)
+            = @tweet.errors.full_messages_for(:genres).first
       .Form__contents-evaluation#star
         = f.label :rate, 'おすすめ度', class: "Form__label"
         %span.Required 必須
         %p= f.hidden_field :rate, id: :raty_star
+      .error__message
+        - if @tweet.errors.include?(:rate)
+          = @tweet.errors.full_messages_for(:rate).first
 
       :javascript
         $('#star').raty({

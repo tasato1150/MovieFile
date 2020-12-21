@@ -1,8 +1,9 @@
 .AccountPage
   .AccountPage__title
-    .AccountPage__logo
-      = icon("fas", "film fa-2x")
-      %h2 MovieFile
+    = link_to root_path do
+      %h2.AccountPage__logo
+        = icon("fas", "film")
+        MovieFile
     %h3 新規アカウントの作成
   .AccountPage__form
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|

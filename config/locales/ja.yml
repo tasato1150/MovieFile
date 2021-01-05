@@ -1,6 +1,12 @@
 ---
 ja:
   activerecord:
+    attributes:
+      tweet:
+        title: タイトル
+        images: 画像
+        genres: ジャンル
+        rate: おすすめ度
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

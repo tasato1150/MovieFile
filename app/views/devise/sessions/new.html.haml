@@ -1,12 +1,14 @@
 .AccountPage
   .AccountPage__title
-    .AccountPage__logo
-      = icon("fas", "film fa-2x")
-      %h2 MovieFile
+    = link_to root_path do
+      %h2.AccountPage__logo
+        = icon("fas", "film")
+        MovieFile
     %h3 登録しているアカウントでログイン
   .AccountPage__form
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .FormField
+        = render 'layouts/notifications'
         .FormField__label--normal
           = f.label :email
         .FormField__input--normal

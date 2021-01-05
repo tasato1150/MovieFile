@@ -1,4 +1,44 @@
 # README
+
+## アプリ名
+MovieFile
+
+## 概要
+映画のレビューサイトです。
+画像につきましては著作権を考慮し、ダミー画像を使用しております。
+
+## 本番環境
+http://3.114.213.74/
+
+ログイン情報（テスト用）
+- Eメール: test@mail.com
+- パスワード: test1111
+
+## 制作背景（意図）
+映画が趣味なのでレビュー内容をまとめられるサイトを作りたいと思ったため。
+
+## 実装機能一覧
+- ユーザー新規登録、ログイン機能
+- 投稿機能
+- いいね機能
+- コメント機能
+- ジャンル別一覧
+
+## 使用技術
+### 言語
+Ruby/Haml/SCSS/Javascript
+
+### ワークフレーム
+Ruby on Rails
+
+### インフラ
+AWS EC2/AWS S3
+
+### データベース
+MySQL
+
+## DB設計
+
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
@@ -33,16 +73,6 @@
 ## genresテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false|
-
-### Association
-- has_many :tweet_genres
-- has_many :tweets, through: :tweet_genres
-
-## genresテーブル
-|Column|Type|Options|
-|------|----|-------|
-|name|string|null: false|
 |name|string|null: false|
 
 ### Association

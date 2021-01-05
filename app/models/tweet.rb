@@ -10,10 +10,13 @@ class Tweet < ApplicationRecord
   accepts_nested_attributes_for :genres, allow_destroy: true
 
   validates :title, presence: true
-  validates :rate, numericality: {
+  validates :rate, presence:  {message: "を登録してください"}, 
+   numericality: {
     less_than_or_equal_to: 5,
     greater_than_or_equal_to: 1
-  }, presence: true
+  }
+  validates :images, presence: {message: "を1枚以上登録してください"}
+  validates :genres, presence: {message: "を1つ以上選択してください"}
 
   def self.search(search)
     if search != ""

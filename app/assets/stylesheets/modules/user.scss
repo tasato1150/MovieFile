@@ -8,11 +8,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  &__logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
 
 .fa-2x {
@@ -35,7 +30,9 @@ h3 {
     letter-spacing: 3px;
     font-size: 40px;
     color: #222222;
-    margin-left: 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #333333;
     &:after {
       content: "";
       display: block;
@@ -143,4 +140,15 @@ h3 {
     padding: 0;
     font-size: 13px;
   }
+}
+
+.error__message {
+  display: contents;
+  margin-top: 5px;
+  color: red;
+  font-size: 14px;
+}
+
+.field_with_errors {
+  display: contents
 }
